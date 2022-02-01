@@ -25,7 +25,8 @@ class TagModel extends BaseTagModel
     /**
      * {@inheritdoc}
      *
-     * @return MauticPlugin\MauticTagManagerBundle\Entity\TagRepository
+     * @return MauticPlugin\MauticTagManagerBundle\Model\MauticPlugin\MauticTagManag
+         erBundle\Entity\TagRepository
      */
     public function getRepository()
     {
