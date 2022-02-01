@@ -28,7 +28,7 @@ class TagModel extends FormModel
     /**
      * {@inheritdoc}
      *
-     * @return Doctrine\ORM\EntityRepository<Mautic\LeadBundle\Entity\Tag>
+     * @return string
      */
     public function getRepository()
     {
