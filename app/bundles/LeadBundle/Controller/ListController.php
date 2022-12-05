@@ -771,7 +771,8 @@ class ListController extends FormController
         $dateRangeValues              = $this->request->get('daterange', []);
         $action                       = $this->generateUrl('mautic_segment_action', ['objectAction' => 'view', 'objectId' => $objectId]);
         $dateRangeForm                = $this->get('form.factory')->create(DateRangeType::class, $dateRangeValues, ['action' => $action]);
-        $segmentContactsLineChartData = $listModel->getSegmentContactsLineChartData(
+        $segmentContactsLineChartData = [];
+        /*$segmentContactsLineChartData = $listModel->getSegmentContactsLineChartData(
             null,
             new \DateTime($dateRangeForm->get('date_from')->getData()),
             new \DateTime($dateRangeForm->get('date_to')->getData()),
@@ -783,13 +784,15 @@ class ListController extends FormController
                 ],
                 't.leadlist_id' => $objectId,
             ]
-        );
+        );*/
 
         return $this->delegateView([
             'returnUrl'      => $this->generateUrl('mautic_segment_action', ['objectAction' => 'view', 'objectId' => $list->getId()]),
             'viewParameters' => [
-                'usageStats'     => $this->get('mautic.lead.segment.stat.dependencies')->getChannelsIds($list->getId()),
-                'campaignStats'  => $this->get('mautic.lead.segment.stat.campaign.share')->getCampaignList($list->getId()),
+                /*'usageStats'     => $this->get('mautic.lead.segment.stat.dependencies')->getChannelsIds($list->getId()),
+                'campaignStats'  => $this->get('mautic.lead.segment.stat.campaign.share')->getCampaignList($list->getId()),*/
+                'usageStats'     => [],
+                'campaignStats'  => [],
                 'stats'          => $segmentContactsLineChartData,
                 'list'           => $list,
                 'segmentCount'   => $listModel->getRepository()->getLeadCount($list->getId()),
