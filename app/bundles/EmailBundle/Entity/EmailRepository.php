@@ -14,6 +14,7 @@ use Mautic\LeadBundle\Entity\DoNotContact;
  */
 class EmailRepository extends CommonRepository
 {
+
     /**
      * Get an array of do not email.
      *
@@ -39,6 +40,39 @@ class EmailRepository extends CommonRepository
         $dnc = [];
         foreach ($results as $r) {
             $dnc[$r['id']] = strtolower($r['email']);
+        }
+
+        return $dnc;
+    }
+
+        /**
+     * Get an array of do not email.
+     *
+     * @param array $leadIds
+     */
+    public function getDoNotEmailWithReasonList($leadIds = []): array
+    {
+        $q = $this->getEntityManager()->getConnection()->createQueryBuilder();
+        $q->select('l.id, l.email, dnc.reason')
+            ->from(MAUTIC_TABLE_PREFIX.'lead_donotcontact', 'dnc')
+            ->leftJoin('dnc', MAUTIC_TABLE_PREFIX.'leads', 'l', 'l.id = dnc.lead_id')
+            ->where('dnc.channel = "email"')
+            ->andWhere($q->expr()->neq('l.email', $q->expr()->literal('')));
+
+        if ($leadIds) {
+            $q->andWhere(
+                $q->expr()->in('l.id', $leadIds)
+            );
+        }
+
+        $results = $q->executeQuery()->fetchAllAssociative();
+
+        $dnc = [];
+        foreach ($results as $r) {
+            $dnc[$r['id']] = [
+                'email'     => strtolower($r['email']), 
+                'reason'    => intval($r['reason']),
+            ];
         }
 
         return $dnc;
