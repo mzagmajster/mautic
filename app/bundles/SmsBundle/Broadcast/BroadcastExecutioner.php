@@ -30,10 +30,7 @@ class BroadcastExecutioner
         foreach ($smses as $sms) {
             $this->contactLimiter = new ContactLimiter($event->getBatch(), null, $event->getMinContactIdFilter(), $event->getMaxContactIdFilter(), [], $event->getThreadId(), $event->getMaxThreads(), $event->getLimit());
             $this->result         = new BroadcastResult();
-            try {
-                $this->send($sms);
-            } catch (\Exception) {
-            }
+            $this->send($sms);
             $event->setResults(
                 sprintf('%s: %s', $this->translator->trans('mautic.sms.sms'), $sms->getName()),
                 $this->result->getSentCount(),
