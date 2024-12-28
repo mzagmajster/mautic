@@ -12,6 +12,7 @@ use Mautic\LeadBundle\Entity\LeadEventLog;
 use Mautic\LeadBundle\Entity\LeadEventLogRepository;
 use Mautic\LeadBundle\Event\LeadTimelineEvent;
 use Mautic\LeadBundle\LeadEvents;
+use Mautic\LeadBundle\Model\LeadModel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class TimelineEventLogCampaignSubscriber implements EventSubscriberInterface
@@ -21,7 +22,8 @@ class TimelineEventLogCampaignSubscriber implements EventSubscriberInterface
     public function __construct(
         LeadEventLogRepository $eventLogRepository,
         private UserHelper $userHelper,
-        Translator $translator
+        Translator $translator,
+        private LeadModel $leadModel,
     ) {
         $this->eventLogRepository = $eventLogRepository;
         $this->translator         = $translator;
@@ -79,14 +81,17 @@ class TimelineEventLogCampaignSubscriber implements EventSubscriberInterface
      */
     private function writeEntries(array $contacts, Campaign $campaign, $action): void
     {
-        $user = $this->userHelper->getUser();
+        $user     = $this->userHelper->getUser();
+        $leadRepo = $this->leadModel->getRepository();
 
         $logs = [];
         foreach ($contacts as $contact) {
             $log = new LeadEventLog();
             $log->setUserId($user->getId())
                 ->setUserName($user->getUsername() ?: $this->translator->trans('mautic.core.system'))
-                ->setLead($contact)
+                ->setLead(
+                    $leadRepo->find($contact->getId())
+                )
                 ->setBundle('campaign')
                 ->setAction($action)
                 ->setObject('campaign')
