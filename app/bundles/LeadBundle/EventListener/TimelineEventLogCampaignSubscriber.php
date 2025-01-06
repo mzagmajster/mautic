@@ -2,7 +2,6 @@
 
 namespace Mautic\LeadBundle\EventListener;
 
-use Doctrine\ORM\EntityManager;
 use Mautic\CampaignBundle\CampaignEvents;
 use Mautic\CampaignBundle\Entity\Campaign;
 use Mautic\CampaignBundle\Event\CampaignLeadChangeEvent;
@@ -24,8 +23,7 @@ class TimelineEventLogCampaignSubscriber implements EventSubscriberInterface
         LeadEventLogRepository $eventLogRepository,
         private UserHelper $userHelper,
         Translator $translator,
-        private LeadModel $leadModel,
-        private EntityManager $entityManager
+        private LeadModel $leadModel
     ) {
         $this->eventLogRepository = $eventLogRepository;
         $this->translator         = $translator;
@@ -88,13 +86,10 @@ class TimelineEventLogCampaignSubscriber implements EventSubscriberInterface
 
         $logs = [];
         foreach ($contacts as $contact) {
-            // Merge it, so we can save the lead event log entry.
-            $this->entityManager->merge($contact);
-
             $log = new LeadEventLog();
             $log->setUserId($user->getId())
                 ->setUserName($user->getUsername() ?: $this->translator->trans('mautic.core.system'))
-                ->setLead($contact)
+                ->setLead($leadRepo->find($contact->getId()))
                 ->setBundle('campaign')
                 ->setAction($action)
                 ->setObject('campaign')

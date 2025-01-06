@@ -13,6 +13,7 @@ use Mautic\CampaignBundle\Model\SummaryModel;
 use Mautic\CoreBundle\Entity\IpAddress;
 use Mautic\CoreBundle\Helper\IpLookupHelper;
 use Mautic\LeadBundle\Entity\Lead;
+use Mautic\LeadBundle\Entity\LeadRepository as LeadBundleLeadRpository;
 use Mautic\LeadBundle\Tracker\ContactTracker;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -44,13 +45,19 @@ class EventLoggerTest extends TestCase
      */
     private MockObject $summaryModel;
 
+    /**
+     * @var LeadBundleLeadRpository|MockObject
+     */
+    private MockObject $leadEventLogRepository;
+
     protected function setUp(): void
     {
-        $this->ipLookupHelper         = $this->createMock(IpLookupHelper::class);
-        $this->contactTracker         = $this->createMock(ContactTracker::class);
-        $this->leadEventLogRepository = $this->createMock(LeadEventLogRepository::class);
-        $this->leadRepository         = $this->createMock(LeadRepository::class);
-        $this->summaryModel           = $this->createMock(SummaryModel::class);
+        $this->ipLookupHelper          = $this->createMock(IpLookupHelper::class);
+        $this->contactTracker          = $this->createMock(ContactTracker::class);
+        $this->leadEventLogRepository  = $this->createMock(LeadEventLogRepository::class);
+        $this->leadRepository          = $this->createMock(LeadRepository::class);
+        $this->summaryModel            = $this->createMock(SummaryModel::class);
+        $this->leadBundleLeadRpository = $this->createMock(LeadBundleLeadRpository::class);
     }
 
     public function testAllLogsAreReturnedWithFinalPersist(): void
@@ -119,7 +126,8 @@ class EventLoggerTest extends TestCase
             $this->contactTracker,
             $this->leadEventLogRepository,
             $this->leadRepository,
-            $this->summaryModel
+            $this->summaryModel,
+            $this->leadBundleLeadRpository,
         );
     }
 }
