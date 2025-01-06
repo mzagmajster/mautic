@@ -48,7 +48,7 @@ class EventLoggerTest extends TestCase
     /**
      * @var LeadBundleLeadRpository|MockObject
      */
-    private MockObject $leadEventLogRepository;
+    private MockObject $leadBundleLeadRpository;
 
     protected function setUp(): void
     {
