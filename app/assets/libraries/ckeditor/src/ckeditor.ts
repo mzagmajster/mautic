@@ -29,7 +29,7 @@ import { CloudServices } from '@ckeditor/ckeditor5-cloud-services';
 import { Alignment } from "@ckeditor/ckeditor5-alignment";
 import { RemoveFormat } from "@ckeditor/ckeditor5-remove-format";
 import { SourceEditing } from "@ckeditor/ckeditor5-source-editing";
-import { GeneralHtmlSupport } from "@ckeditor/ckeditor5-html-support";
+import { GeneralHtmlSupport, FullPage } from "@ckeditor/ckeditor5-html-support";
 import { Mention } from "@ckeditor/ckeditor5-mention";
 import TokenPlugin from './TokenPlugin';
 
@@ -86,6 +86,7 @@ export default class ClassicEditor extends ClassicEditorBase {
         PictureEditing,
         Table,
         TableToolbar,
-        TextTransformation
+        TextTransformation,
+        FullPage
     ];
 }
