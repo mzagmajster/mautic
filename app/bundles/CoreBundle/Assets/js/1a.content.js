@@ -604,9 +604,7 @@ Mautic.onPageLoad = function (container, response, inModal) {
         
     }*/
 
-    console.log(window.location.origin);
-    console.log('ddaa');
-    Mautic.ConvertFieldToTinyMceEditor("https://tf11emailbroken.ddev.site");
+    Mautic.ConvertFieldToTinyMceEditor(window.location.origin);
 
     //prevent auto closing dropdowns for dropdown forms
     if (mQuery(container + ' .dropdown-menu-form').length) {

@@ -355,23 +355,13 @@ Mautic.ConvertFieldToTinyMceEditor  = function(mauticUrl) {
         contextmenu: 'link image table',
         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
         save_enablewhendirty: true,
-        save_onsavecallback: function (data) {
-            console.log(data);
+        save_onsavecallback: function () {
             alert("Email saved!");
-        }, 
-        document_base_url: '/',
-        setup: function(editor) {
-            editor.on('BeforeSetContent', function(e) {
-                e.content = e.content.replace(/src="(?!https?:\/\/)/g, 'src="' + window.location.origin + '/');
-            });
-        }
+        },
+        relative_urls: false,
+        remove_script_host: false,
+        document_base_url: mauticUrl,
       });
-
-    // tinymce.init({
-    //     selector: 'textarea.editor',
-    //     plugins: 'link lists',
-    //     toolbar: 'bold italic | alignleft aligncenter alignright | bullist numlist | link',
-    // });
 }
 
 Mautic.GetCkEditorConfigOptions  = function(ckEditorToolbarOptions, tokenCallback) {
