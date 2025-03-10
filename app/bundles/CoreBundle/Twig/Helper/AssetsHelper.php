@@ -451,7 +451,12 @@ final class AssetsHelper
         $assets = $this->assetHelper->getAssets();
 
         if ($includeEditor) {
-            $assets['js'] = array_merge($assets['js'], $this->getFroalaScripts(), $this->getCKEditorScripts());
+            $assets['js'] = array_merge(
+                $assets['js'],
+                $this->getFroalaScripts(),
+                $this->getCKEditorScripts(),
+                $this->getTinyMCEScripts(),
+            );
         }
 
         if (isset($assets['js'])) {
@@ -468,6 +473,9 @@ final class AssetsHelper
             try {
                 $builder     = $this->builderIntegrationsHelper->getBuilder('email');
                 $builderName = $builder->getName();
+                /**
+                 * @note mz_trace
+                 */
             } catch (IntegrationNotFoundException) {
                 // Assume legacy builder
                 $builderName = 'legacy';
@@ -562,6 +570,15 @@ final class AssetsHelper
             $plugins.'gatedvideo.js?v'.$this->version,
             $plugins.'token.js?v'.$this->version,
             $plugins.'dynamic_content.js?v'.$this->version,
+        ];
+    }
+
+    private function getTinyMCEScripts(): array
+    {
+        $base    = 'media/libraries/tinymce/';
+
+        return [
+            $base.'tinymce.js?v'.$this->version,
         ];
     }
 

@@ -63,6 +63,7 @@
     "mousetrap": "^1.6.5",
     "multiselect": "^0.9.12",
     "shufflejs": "^5.4.1",
+    "tinymce": "^7.7.1",
     "typeahead.js": "^0.11.1",
     "vimeo-froogaloop2": "^0.1.1"
   },

@@ -578,7 +578,7 @@ Mautic.onPageLoad = function (container, response, inModal) {
     }
 
     // This turns all textarea elements with class "editor" into CKEditor ones, except for Dynamic Content elements, which can be initialized with Mautic.setDynamicContentEditors().
-    if (mauticFroalaEnabled && mQuery(container + ' textarea.editor:not(".editor-dynamic-content")').length && Mautic.getActiveBuilderName() === 'legacy') {
+    /*if (mauticFroalaEnabled && mQuery(container + ' textarea.editor:not(".editor-dynamic-content")').length && Mautic.getActiveBuilderName() === 'legacy') {
         mQuery(container + ' textarea.editor:not(".editor-dynamic-content")').each(function () {
             mQuery(this).froalaEditor();
         });
@@ -600,7 +600,13 @@ Mautic.onPageLoad = function (container, response, inModal) {
 
             Mautic.ConvertFieldToCkeditor(textarea, ckEditorToolbar);
         });
-    }
+
+        
+    }*/
+
+    console.log(window.location.origin);
+    console.log('ddaa');
+    Mautic.ConvertFieldToTinyMceEditor("https://tf11emailbroken.ddev.site");
 
     //prevent auto closing dropdowns for dropdown forms
     if (mQuery(container + ' .dropdown-menu-form').length) {

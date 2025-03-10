@@ -1400,7 +1400,8 @@ Mautic.getLeadEmailContent = function (el) {
         if (mauticFroalaEnabled && Mautic.getActiveBuilderName() === 'legacy') {
             mQuery(bodyEl).froalaEditor('html.set', response.body);
         } else {
-            ckEditors.get( mQuery(bodyEl)[0] ).setData(response.body);
+            // ckEditors.get( mQuery(bodyEl)[0] ).setData(response.body);
+            tinymce.get('lead_quickemail_body')?.setContent(response.body);
         }
 
         mQuery(bodyEl).val(response.body);
