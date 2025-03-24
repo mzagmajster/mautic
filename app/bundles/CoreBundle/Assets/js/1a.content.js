@@ -578,10 +578,12 @@ Mautic.onPageLoad = function (container, response, inModal) {
     }
 
     // This turns all textarea elements with class "editor" into CKEditor ones, except for Dynamic Content elements, which can be initialized with Mautic.setDynamicContentEditors().
-    /*if (mauticFroalaEnabled && mQuery(container + ' textarea.editor:not(".editor-dynamic-content")').length && Mautic.getActiveBuilderName() === 'legacy') {
+    if (mauticFroalaEnabled && mQuery(container + ' textarea.editor:not(".editor-dynamic-content")').length && Mautic.getActiveBuilderName() === 'legacy') {
         mQuery(container + ' textarea.editor:not(".editor-dynamic-content")').each(function () {
             mQuery(this).froalaEditor();
         });
+    } else if (mQuery('#lead_quickemail_body').length) {
+        Mautic.ConvertFieldToTinyMceEditor(window.location.origin);    
     } else if (mQuery(container + ' textarea.editor:not(".editor-dynamic-content")').length) {
         mQuery(container + ' textarea.editor:not(".editor-dynamic-content")').each(function () {
             const textarea = mQuery(this);
@@ -602,9 +604,7 @@ Mautic.onPageLoad = function (container, response, inModal) {
         });
 
         
-    }*/
-
-    Mautic.ConvertFieldToTinyMceEditor(window.location.origin);
+    }
 
     //prevent auto closing dropdowns for dropdown forms
     if (mQuery(container + ' .dropdown-menu-form').length) {

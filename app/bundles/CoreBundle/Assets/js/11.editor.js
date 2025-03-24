@@ -303,7 +303,6 @@ Mautic.ConvertFieldToCkeditor  = function(textarea, ckEditorToolbarOptions) {
 }
 
 Mautic.ConvertFieldToTinyMceEditor  = function(mauticUrl) {
-
     tinymce.remove('textarea.editor');
     tinymce.init({
         license_key: 'gpl',
