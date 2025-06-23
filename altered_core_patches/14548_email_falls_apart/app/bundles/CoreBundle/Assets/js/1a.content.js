@@ -582,7 +582,7 @@ Mautic.onPageLoad = function (container, response, inModal) {
         mQuery(container + ' textarea.editor:not(".editor-dynamic-content")').each(function () {
             mQuery(this).froalaEditor();
         });
-    }else if (mQuery('#lead_quickemail_body').length) {
+    } else if (mQuery('#lead_quickemail_body').length) {
         Mautic.ConvertFieldToTinyMceEditor(window.location.origin);    
     } else if (mQuery(container + ' textarea.editor:not(".editor-dynamic-content")').length) {
         mQuery(container + ' textarea.editor:not(".editor-dynamic-content")').each(function () {
@@ -602,6 +602,8 @@ Mautic.onPageLoad = function (container, response, inModal) {
 
             Mautic.ConvertFieldToCkeditor(textarea, ckEditorToolbar);
         });
+
+        
     }
 
     //prevent auto closing dropdowns for dropdown forms
@@ -739,11 +741,11 @@ Mautic.setDynamicContentEditors = function(container) {
         console.log('[Builder] Using CKEditor for the Dynamic Content editor');
         mQuery(container + ' textarea.editor-dynamic-content').each(function () {
             const textarea = mQuery(this);
-            const maxButtons = ['undo', 'redo', '|', 'bold', 'italic', 'underline', 'heading', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', 'alignment', 'numberedList', 'bulletedList', 'blockQuote', 'removeFormat', 'link', 'ckfinder', 'mediaEmbed', 'insertTable', 'TokenPlugin', 'sourceEditing'];
-            let minButtons = ['undo', 'redo', '|', 'bold', 'italic', 'underline'];
+            const maxButtons = [ 'Undo', 'Redo', '-', 'Bold', 'Italic', 'Underline', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'NumberedList', 'BulletedList', 'Blockquote', 'RemoveFormat', 'Link', 'Image', 'Table', 'InsertToken', 'Sourcedialog', 'Maximize']
+            let minButtons = ['Undo', 'Redo', '|', 'Bold', 'Italic', 'Underline'];
 
             if (textarea.hasClass('editor-dynamic-content') || textarea.hasClass('editor-basic')) {
-                minButtons = ['undo', 'redo', '|', 'bold', 'italic', 'underline', 'heading', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', 'alignment', 'numberedList', 'bulletedList', 'blockQuote', 'removeFormat', 'link', 'ckfinder', 'mediaEmbed', 'insertTable', 'sourceEditing'];
+                minButtons = ['Undo', 'Redo', '-', 'Bold', 'Italic', 'Underline', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'NumberedList', 'BulletedList', 'Blockquote', 'RemoveFormat', 'Link', 'Image', 'Table', 'Sourcedialog', 'Maximize'];
             }
 
             let ckEditorToolbar = minButtons;
@@ -921,7 +923,7 @@ Mautic.ajaxifyLink = function (el, event) {
 
     var link = mQuery(el).attr('data-menu-link');
     if (link !== undefined && link.charAt(0) != '#') {
-        link = "#" + CSS.escape(link);
+        link = "#" + link;
     }
 
     var method = mQuery(el).attr('data-method');

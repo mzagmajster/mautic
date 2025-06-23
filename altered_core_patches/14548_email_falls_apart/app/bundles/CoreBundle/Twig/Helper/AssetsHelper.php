@@ -455,7 +455,7 @@ final class AssetsHelper
                 $assets['js'],
                 $this->getFroalaScripts(),
                 $this->getCKEditorScripts(),
-                $this->getTinyMCEScripts()
+                $this->getTinyMCEScripts(),
             );
         }
 
@@ -473,6 +473,9 @@ final class AssetsHelper
             try {
                 $builder     = $this->builderIntegrationsHelper->getBuilder('email');
                 $builderName = $builder->getName();
+                /**
+                 * @note mz_trace
+                 */
             } catch (IntegrationNotFoundException) {
                 // Assume legacy builder
                 $builderName = 'legacy';
