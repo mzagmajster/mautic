@@ -497,6 +497,16 @@ export default class BuilderService {
       openAssetsOnDrop: 1,
       autoAdd: 1,
       headers: { 'X-CSRF-Token': mauticAjaxCsrf }, // global variable
+      custom: {
+        open(props) {
+          Mautic.openMediaManager();
+          window.document.fileManagerInsertImageCallback = function(selector, url) {
+            props.select(url, true);
+            // props.options.target.set('src',  url);
+            props.close();
+          }
+        },
+      },
     };
   }
 

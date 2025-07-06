@@ -29,6 +29,7 @@ function launchBuilderGrapesjs(formName) {
   const builder = new BuilderService(assetService);
   // Initialize GrapesJS
   builder.initGrapesJS(formName);
+  Mautic.builder = builder;
 
   // trigger show event on DOM element
   $builder.trigger('builder:show', [builder.editor])
