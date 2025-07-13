@@ -22,6 +22,7 @@
     },
   "require": {
     "composer/installers": "^1.11",
+    "helios-ag/fm-elfinder-bundle": "^12.6",
     "mautic/core-lib": "^5.0"
   },
   "require-dev": {
