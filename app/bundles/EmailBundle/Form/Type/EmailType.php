@@ -234,6 +234,7 @@ class EmailType extends AbstractType
         $builder->add('isPublished', YesNoButtonGroupType::class, $isPublishOptions);
         $builder->add('publishUp', PublishUpDateType::class, ['disabled' => !$canPublish]);
         $builder->add('publishDown', PublishDownDateType::class, ['disabled' => !$canPublish]);
+        $builder->add('continueSending', YesNoButtonGroupType::class, ['required' => false]);
 
         $builder->add(
             'plainText',
