@@ -21,7 +21,7 @@ class ModelFactory
      */
     public function getModel(string $modelNameKey): MauticModelInterface
     {
-        if (class_exists($modelNameKey) && $this->container->has($modelNameKey)) {
+        if (class_exists($modelNameKey) || $this->container->has($modelNameKey)) {
             return $this->container->get($modelNameKey);
         }
 
